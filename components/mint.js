@@ -2,7 +2,7 @@ import MintForm from "../components/mint_form"
 import { useAccount } from "@starknet-react/core"
 import OuterBox from "./outer_box"
 
-export default function Mint() {
+export default function Mint({ children, callback }) {
   const { account } = useAccount()
   return (
     <OuterBox>
@@ -14,7 +14,8 @@ export default function Mint() {
                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
                 commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
               </p> */}
-      <MintForm account={account}></MintForm>
+      <MintForm account={account} callback={callback}></MintForm>
+      {children}
     </OuterBox>
   )
 }

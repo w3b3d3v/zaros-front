@@ -12,7 +12,7 @@ const erc20Addresses = {
   usdc: "0x005A643907b9A4BC6A55E9069C4fD5fd1f5c79A22470690F75556C4736e34,426",
 }
 
-export default function MintForm({ account }) {
+export default function MintForm({ account, callback }) {
   const [total, setTotal] = useState(0)
   const [price, setPrice] = useState(0)
   const contracts = {
@@ -56,6 +56,12 @@ export default function MintForm({ account }) {
   useEffect(() => {
     const t = formik.values.usdc + formik.values.dai + formik.values.eth * price
     setTotal(t / 3.0)
+    callback({
+      total: t,
+      usdc: formik.values.usdc,
+      dai: formik.values.dai,
+      eth: formik.values.eth * price,
+    })
   }, [formik.values])
 
   return (
@@ -111,7 +117,9 @@ export default function MintForm({ account }) {
         />
       </div>
 
-      <h3 className="bg-gray-800 rounded-lg h-10 align-middle">Total Colateral: {total * 3}</h3>
+      <h3 className="bg-gray-800 rounded-lg h-10 align-middle">
+        Total Colateral: {(total * 3).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+      </h3>
       <div className="place-content-center grid">
         <Image src="/images/down_arrow.svg" alt="arrow" width={20} height={20} />
       </div>
@@ -121,7 +129,9 @@ export default function MintForm({ account }) {
           <Image src="/images/usd.svg" alt="ETH" width={30} height={30}></Image>
         </label>
         <div>zUSD</div>
-        <div className="text-2xl right-0 relative text-cyan-300">{total}</div>
+        <div className="text-2xl right-0 relative text-cyan-300">
+          {total.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+        </div>
       </div>
 
       <Button pill={true} className="w-1/4 " gradientMonochrome="cyan" type="submit">

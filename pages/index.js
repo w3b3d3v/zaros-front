@@ -3,8 +3,9 @@ import NavBar from "../components/navbar"
 import { Tabs } from "flowbite-react"
 import Mint from "../components/mint"
 import Swap from "../components/swap"
-
+import Vault from "../components/vault"
 export default function Index() {
+  const [mintValues, setMintValues] = useState({})
   return (
     <div className="relative overflow-hidden dark">
       <div className="mx-auto max-w-7xl">
@@ -13,13 +14,17 @@ export default function Index() {
             <NavBar></NavBar>
             <Tabs.Group aria-label="Tabs with underline" style="underline">
               <Tabs.Item active={true} title="Mint">
-                <Mint></Mint>
+                <Mint callback={setMintValues}>
+                  <Vault values={mintValues}></Vault>
+                </Mint>
               </Tabs.Item>
               <Tabs.Item title="Bridge">Bridge content</Tabs.Item>
               <Tabs.Item title="Swap">
                 <Swap></Swap>
               </Tabs.Item>
-              <Tabs.Item title="Manage Vault">Vault content</Tabs.Item>
+              <Tabs.Item title="Manage Vault">
+                <Vault values={mintValues}></Vault>
+              </Tabs.Item>
             </Tabs.Group>
           </main>
         </div>
