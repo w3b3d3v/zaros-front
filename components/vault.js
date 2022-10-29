@@ -6,6 +6,7 @@ export default function Vault({ values }) {
     credits: {
       enabled: false,
     },
+    colors: ["#22D3EE", "#E2F5EF", "#48907F"],
     chart: {
       plotBackgroundColor: true,
       plotBorderWidth: null,
@@ -47,9 +48,9 @@ export default function Vault({ values }) {
         innerSize: "50%",
         name: "Share",
         data: [
+          { name: "ETH", y: values.eth },
           { name: "USDC", y: values.usdc },
           { name: "DAI", y: values.dai },
-          { name: "ETH", y: values.eth },
         ],
       },
     ],

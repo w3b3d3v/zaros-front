@@ -49,6 +49,7 @@ export default function MintForm({ account, callback }) {
         })
       )
       .catch((err) => {
+        setPrice(1621)
         console.log(err)
       })
   })
