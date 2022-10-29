@@ -1,7 +1,21 @@
 import { useFormik } from "formik"
 import Image from "next/image"
+import { Contract } from "starknet"
+import erc20abi from "../utils/erc20abi.json"
 
-export default function MintForm() {
+const erc20Addresses = {
+  eth: "0x049d36570d4e46f48e99674Bd3fcC84644dDD6B96F7C741b1562b82F9E004dc7",
+  dai: "0x03e85bfBB8E2a42b7beaD9e88E9A1B19DbCCf661471061807292120462396ec9",
+  usdc: "0x005A643907b9A4BC6A55E9069C4fD5fd1f5c79A22470690F75556C4736e34,426",
+}
+
+export default function MintForm({ account }) {
+  const contracts = {
+    eth: new Contract(erc20abi, erc20Addresses.eth, account),
+    dai: new Contract(erc20abi, erc20Addresses.dai, account),
+    usdc: new Contract(erc20abi, erc20Addresses.usdc, account),
+  }
+
   const formik = useFormik({
     initialValues: {
       usdc: 0.0,
@@ -9,7 +23,13 @@ export default function MintForm() {
       eth: 0.0,
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+      console.log(Object.keys(values))
+
+      for (let token of Object.keys(values)) {
+        const val = values[token] * Math.pow(10, 18)
+        console.log("Approving " + val + " " + token + " no " + contracts[token].address)
+        contracts[token].approve(account.address, [String(val), "0"])
+      }
     },
   })
 
