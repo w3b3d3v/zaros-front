@@ -17,6 +17,7 @@
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.3.2",
     "formik": "^2.2.9",
+    "formik-observer": "^1.0.1",
     "get-starknet": "^1.5.0",
     "next": "13.0.0",
     "next-themes": "^0.2.1",

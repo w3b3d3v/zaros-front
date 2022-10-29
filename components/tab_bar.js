@@ -17,7 +17,7 @@ export default function TabBar() {
             aria-controls="profile"
             aria-selected="true"
           >
-            Bridge
+            Profile
           </button>
         </li>
         <li className="mr-2" role="presentation">
@@ -30,7 +30,7 @@ export default function TabBar() {
             aria-controls="dashboard"
             aria-selected="false"
           >
-            Swap
+            Dashboard
           </button>
         </li>
         <li className="mr-2" role="presentation">
@@ -43,7 +43,7 @@ export default function TabBar() {
             aria-controls="settings"
             aria-selected="false"
           >
-            Mint
+            Settings
           </button>
         </li>
         <li role="presentation">
@@ -56,7 +56,7 @@ export default function TabBar() {
             aria-controls="contacts"
             aria-selected="false"
           >
-            Manage Vault
+            Contacts
           </button>
         </li>
       </ul>

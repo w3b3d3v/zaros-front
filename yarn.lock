@@ -1506,6 +1506,14 @@ flowbite@^1.5.3:
     "@popperjs/core" "^2.9.3"
     mini-svg-data-uri "^1.4.3"
 
+formik-observer@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/formik-observer/-/formik-observer-1.0.1.tgz#da0943851d37aab65a4e70b255a4e4d54af31ebc"
+  integrity sha512-RXKsVdfxUHzXK/lfAmzTh+C1Mn7XI5+DIQWRmC+354sGCAlosmbk5cXBdyhrrOO2mM0QNZqerGA9hQFturSo6A==
+  dependencies:
+    lodash.debounce "^4.0.8"
+    lodash.isequal "^4.5.0"
+
 formik@^2.2.9:
   version "2.2.9"
   resolved "https://registry.yarnpkg.com/formik/-/formik-2.2.9.tgz#8594ba9c5e2e5cf1f42c5704128e119fc46232d0"
@@ -2100,6 +2108,16 @@ lodash-es@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
   integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
 
 lodash.map@^4.5.1:
   version "4.6.0"

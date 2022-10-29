@@ -10,13 +10,13 @@ export default function ConnectWallet() {
   return (
     <div className="rounded-md w-100 right-0">
       {status === "connected" && (
-        <div>
+        <div className="w-1/2">
           <p className="truncate">Account: {address}</p>
           <a
             key={argentX(connectors).id()}
             onClick={() => disconnect(argentX(connectors))}
             href="#"
-            className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+            className="bg-gradient-to-r flex w-full items-center justify-center rounded-full border border-transparent px-8 py-3 text-base font-medium text-white from-cyan-400 to-cyan-700 bg-cyan-400 hover:bg-cyan-700 md:py-4 md:px-10 md:text-lg"
           >
             Disconnect
           </a>
@@ -29,7 +29,7 @@ export default function ConnectWallet() {
           onClick={() => connect(argentX(connectors))}
           disabled={!argentX(connectors).available()}
           href="#"
-          className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+          className="bg-gradient-to-r flex w-full items-center justify-center rounded-full border border-transparent px-8 py-3 text-base font-medium text-white from-cyan-400 to-cyan-700 bg-cyan-400 hover:bg-cyan-700 md:py-4 md:px-10 md:text-lg"
         >
           Connect Wallet
         </a>

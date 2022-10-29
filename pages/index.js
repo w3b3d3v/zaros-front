@@ -2,6 +2,7 @@ import { useState } from "react"
 import NavBar from "../components/navbar"
 import { Tabs } from "flowbite-react"
 import Mint from "../components/mint"
+import Swap from "../components/swap"
 
 export default function Index() {
   return (
@@ -15,7 +16,9 @@ export default function Index() {
                 <Mint></Mint>
               </Tabs.Item>
               <Tabs.Item title="Bridge">Bridge content</Tabs.Item>
-              <Tabs.Item title="Swap">Swap content</Tabs.Item>
+              <Tabs.Item title="Swap">
+                <Swap></Swap>
+              </Tabs.Item>
               <Tabs.Item title="Manage Vault">Vault content</Tabs.Item>
             </Tabs.Group>
           </main>
