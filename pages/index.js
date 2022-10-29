@@ -1,14 +1,22 @@
 import { useState } from "react"
 import MintForm from "../components/mint_form"
 import NavBar from "../components/navbar"
+import { useAccount, useConnectors } from "@starknet-react/core"
 
 const networks = ["zkSync", "Starknet"]
 
 export default function Index() {
   const [network, setNetwork] = useState(networks[0])
-  const [usdc, setUsdc] = useState(0)
-  const [eth, setEth] = useState(0)
-  const [dai, setDai] = useState(0)
+  const { connectors, connect, disconnect } = useConnectors()
+  const { account, address, status } = useAccount()
+
+  const connectWallet = () => {
+    starknet.enable()
+  }
+
+  const argentX = (c) => {
+    return c.filter((x) => x.id() === "argentX")[0]
+  }
 
   return (
     <div className="relative overflow-hidden dark">
@@ -17,13 +25,32 @@ export default function Index() {
           <main className="mx-auto mt-10 space-y-8 max-w-7xl px-4 sm:mt-12 sm:px-12 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <NavBar></NavBar>
             <div className="mt-5 sm:mt-8 space-x-8 sm:flex sm:justify-center lg:justify-start">
-              <div className="rounded-md shadow">
-                <a
-                  href="#"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
-                >
-                  Connect Wallet
-                </a>
+              <div className="rounded-md w-1/2">
+                {status === "connected" && (
+                  <div>
+                    <p className="truncate">Account: {address}</p>
+                    <a
+                      key={argentX(connectors).id()}
+                      onClick={() => disconnect(argentX(connectors))}
+                      href="#"
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+                    >
+                      Disconnect
+                    </a>
+                  </div>
+                )}
+
+                {status !== "connected" && (
+                  <a
+                    key={argentX(connectors).id()}
+                    onClick={() => connect(argentX(connectors))}
+                    disabled={!argentX(connectors).available()}
+                    href="#"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+                  >
+                    Connect Wallet
+                  </a>
+                )}
               </div>
               <select
                 className="px-4 py-3 rounded-full w-60 text-black"
