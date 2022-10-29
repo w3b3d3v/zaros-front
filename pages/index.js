@@ -9,7 +9,7 @@ export default function Index() {
     <div className="relative overflow-hidden dark">
       <div className="mx-auto max-w-7xl">
         <div className="relative z-10 dark pb-8 sm:pb-16 md:pb-20 lg:w-full lg:pb-28 xl:pb-12">
-          <main className="mx-auto mt-10 space-y-8 max-w-7xl px-4 sm:mt-12 sm:px-12 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <main className="mx-auto mt-10 space-y-8 max-w-7xl px-4 sm:px-12 lg:px-8">
             <NavBar></NavBar>
             <Tabs.Group aria-label="Tabs with underline" style="underline">
               <Tabs.Item active={true} title="Mint">

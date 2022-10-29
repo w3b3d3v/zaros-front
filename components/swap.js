@@ -17,7 +17,7 @@ export default function Swap() {
   })
   return (
     <OuterBox>
-      <h1 className="text-4xl font-bold tracking-tight text-gray-300">
+      <h1 className="text-4xl flex font-bold space-x-2 tracking-tight text-gray-300">
         <span className="block xl:inline">Swap your</span>{" "}
         <span className="block text-cyan-400 xl:inline">tokens</span>
       </h1>

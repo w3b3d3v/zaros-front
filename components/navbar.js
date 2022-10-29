@@ -5,7 +5,7 @@ import Image from "next/image"
 import ConnectWallet from "./connect_wallet"
 import { useState } from "react"
 
-const networks = ["zkSync", "Starknet"]
+const networks = ["Starknet", "zkSync"]
 
 const navigation = [
   { name: "Bridge", href: "#" },
@@ -18,41 +18,33 @@ export default function NavBar() {
   const [network, setNetwork] = useState(networks[0])
   return (
     <Popover>
-      <div className="relative px-4 pt-6 sm:px-6 lg:px-8">
-        <nav
-          className="relative flex items-center space-x-10 align-top sm:h-10 lg:justify-start"
-          aria-label="Global"
-        >
-          <div className="flex flex-shrink-0 flex-grow items-center lg:flex-grow-0">
-            <div className="flex w-full items-center justify-between md:w-auto">
-              <a href="#">
-                <span className="sr-only">Zaros</span>
-                <Image
-                  alt="Zaros"
-                  width={200}
-                  height={50}
-                  className="h-8 w-auto sm:h-10"
-                  src="/logo.svg"
-                />
-              </a>{" "}
-              Zaros
-              <div className="-mr-2 flex items-center md:hidden"></div>
-            </div>
+      <nav
+        className="relative flex items-center space-x-10 align-top sm:h-10 lg:justify-start"
+        aria-label="Global"
+      >
+        <div className="flex flex-shrink-0 flex-grow items-center lg:flex-grow-0">
+          <div className="flex w-full items-center justify-between md:w-auto">
+            <a href="#">
+              <Image alt="Zaros" width={80} height={80} className="" src="/logo.svg" />
+              <span className="sr-only">Zaros</span>
+            </a>{" "}
+            <h1 className="text-4xl">Zaros</h1>
+            <div className="-mr-2 flex items-center md:hidden"></div>
           </div>
-          <select
-            className="px-4 py-3 rounded-full w-60 text-black"
-            value={network}
-            onChange={(e) => setNetwork(e.target.value)}
-          >
-            {networks.map((value) => (
-              <option value={value} key={value}>
-                {value}
-              </option>
-            ))}
-          </select>
-          <ConnectWallet></ConnectWallet>
-        </nav>
-      </div>
+        </div>
+        <select
+          className="px-4 py-3 rounded-full w-60 text-black"
+          value={network}
+          onChange={(e) => setNetwork(e.target.value)}
+        >
+          {networks.map((value) => (
+            <option value={value} key={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+        <ConnectWallet></ConnectWallet>
+      </nav>
     </Popover>
   )
 }
