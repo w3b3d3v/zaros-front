@@ -72,14 +72,14 @@ export default function MintForm({ account, callback }) {
     },
   })
 
-  useEffect(() => {
-    console.log(account)
-  }, account)
+  // useEffect(() => {
+  //   console.log(account)
+  // }, account)
 
   useEffect(() => {
     const usdcAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
     const url = `https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=${usdcAddress}&vs_currencies=eth`
-    fetch(url, { headers: { Origin: "http://localhost" } })
+    fetch(url, { headers: { Origin: "*" } })
       .then((res) =>
         res.json().then((json) => {
           setPrice(1.0 / json[usdcAddress.toLowerCase()].eth)

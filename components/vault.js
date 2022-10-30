@@ -18,11 +18,10 @@ export default function Vault({ children, values }) {
     VaultManager({ account })
       .readVault(account.address)
       .then((res) => {
-        console.log(res[0])
         setReadValues({
-          dai: uint256ToBN(res[0].dai_ammount),
-          usdc: uint256ToBN(res[0].usdc_ammount),
-          eth: uint256ToBN(res[0].eth_ammount),
+          dai: uint256ToBN(res[0].dai_amount).toNumber(),
+          usdc: uint256ToBN(res[0].usdc_amount).toNumber(),
+          eth: uint256ToBN(res[0].eth_amount).toNumber(),
         })
       })
   }, [account])
