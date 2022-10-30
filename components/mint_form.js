@@ -7,9 +7,9 @@ import { useEffect, useMemo, useState } from "react"
 import FormikObserver from "formik-observer"
 
 const erc20Addresses = {
-  eth: "0x049d36570d4e46f48e99674Bd3fcC84644dDD6B96F7C741b1562b82F9E004dc7",
-  dai: "0x03e85bfBB8E2a42b7beaD9e88E9A1B19DbCCf661471061807292120462396ec9",
-  usdc: "0x005A643907b9A4BC6A55E9069C4fD5fd1f5c79A22470690F75556C4736e34,426",
+  eth: "0x078f6d0ca875b7e5a49a987fb96758a10c820fea21546568f66d3825aaf76f8f",
+  dai: "0x02f5641f96940584d47d77e6126b8dfd055b277ada80723d0a4d926863d5cec8",
+  usdc: "0x01ad533463afa8544cee30231bfebddd10f07a3c6bf9fdf6a315a25e7c375108",
 }
 
 export default function MintForm({ account, callback }) {
@@ -135,7 +135,7 @@ export default function MintForm({ account, callback }) {
         </div>
       </div>
 
-      <Button pill={true} className="w-1/4 " gradientMonochrome="cyan" type="submit">
+      <Button pill={true} className="w-1/2 " gradientMonochrome="cyan" type="submit">
         Mint
       </Button>
     </form>

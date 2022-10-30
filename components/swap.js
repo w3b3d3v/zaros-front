@@ -17,11 +17,11 @@ export default function Swap() {
   })
   return (
     <OuterBox>
-      <h1 className="text-4xl flex font-bold space-x-2 tracking-tight text-gray-300">
-        <span className="block xl:inline">Swap your</span>{" "}
-        <span className="block text-cyan-400 xl:inline">tokens</span>
-      </h1>
       <form className="mt-5 space-y-8" onSubmit={formik.handleSubmit}>
+        <h1 className="text-4xl flex font-bold space-x-2 tracking-tight text-gray-300">
+          <span className="block xl:inline">Swap your</span>{" "}
+          <span className="block text-cyan-400 xl:inline">tokens</span>
+        </h1>
         <div className="shadow shadow-white rounded-lg flex flex-row space-x-2 p-4">
           <label htmlFor="ETH" className="block text-sm font-medium text-gray-400">
             <Image src="/images/eth.svg" alt="ETH" width={30} height={30}></Image>
