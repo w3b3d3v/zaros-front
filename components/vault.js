@@ -2,8 +2,34 @@ import Image from "next/image"
 import OuterBox from "./outer_box"
 import { Button } from "flowbite-react"
 import CollateralLine from "./collateral_line"
+import VaultManager from "./vault_manager"
+import { useAccount } from "@starknet-react/core"
+import { useEffect, useState } from "react"
+import { uint256ToBN } from "starknet/dist/utils/uint256"
 
 export default function Vault({ children, values }) {
+  const { account } = useAccount()
+  const [readValues, setReadValues] = useState({})
+
+  useEffect(() => {
+    if (!account) {
+      return
+    }
+    VaultManager({ account })
+      .readVault(account.address)
+      .then((res) => {
+        console.log(res[0])
+        setReadValues({
+          dai: uint256ToBN(res[0].dai_ammount),
+          usdc: uint256ToBN(res[0].usdc_ammount),
+          eth: uint256ToBN(res[0].eth_ammount),
+        })
+      })
+  }, [account])
+
+  useEffect(() => {
+    console.log(readValues)
+  }, [readValues])
   return (
     <OuterBox>
       <div className="grid space-y-10">

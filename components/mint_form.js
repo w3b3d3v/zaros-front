@@ -4,12 +4,15 @@ import { Contract } from "starknet"
 import erc20abi from "../utils/erc20abi.json"
 import { Button } from "flowbite-react"
 import { useEffect, useMemo, useState } from "react"
-import FormikObserver from "formik-observer"
+import VaultManager from "./vault_manager"
+import { bnToUint256 } from "starknet/dist/utils/uint256"
 
 const erc20Addresses = {
-  eth: "0x078f6d0ca875b7e5a49a987fb96758a10c820fea21546568f66d3825aaf76f8f",
-  dai: "0x02f5641f96940584d47d77e6126b8dfd055b277ada80723d0a4d926863d5cec8",
-  usdc: "0x01ad533463afa8544cee30231bfebddd10f07a3c6bf9fdf6a315a25e7c375108",
+  zeth: "0x04c83534Ce5A87e3C482d759c4112a509d708C80fF0F1B478bdA911Baab5d505",
+  eth: "0x06636E9CF607ab04Fa718Dc3631e56253EE384ad7DD5A60e1bC2F59A5bAB34a8",
+  dai: "0x0088595D636050F7DafA72cf297Af560306541f1Bd0aC14568B35CcC5D29107C",
+  usdc: "0x04bAD03Eae13afE101BE8Af90C4E4f3934058604F9346E76B9d4E936C450aC67",
+  zusd: "0x01838939E7b6C98b46a0a1aD0fcBEabaD7fc28364B1f5a7aB6eeDC48f6824326",
 }
 
 export default function MintForm({ account, callback }) {
@@ -29,15 +32,49 @@ export default function MintForm({ account, callback }) {
     },
 
     onSubmit: (values) => {
-      console.log(Object.keys(values))
+      console.log(values)
+
+      if (!account) {
+        return
+      }
+
+      const m = (v) => v * Math.pow(10, 18)
+
+      // VaultManager({ account }).createVault(
+      //   [String(m(values["eth"])), "0"],
+      //   [String(m(values["dai"])), "0"],
+      //   [String(m(values["usdc"])), "0"],
+      //   [String(m(total)), "0"]
+      // )
+
+      contracts["eth"].approve(account.address, [String(m(values["eth"])), "0"]).then((res) => {
+        contracts["dai"].approve(account.address, [String(m(values["dai"])), "0"]).then((res) => {
+          contracts["usdc"]
+            .approve(account.address, [String(m(values["usdc"])), "0"])
+            .then((res) => {
+              VaultManager({ account })
+                .createVault(
+                  [String(m(values["eth"])), "0"],
+                  [String(m(values["dai"])), "0"],
+                  [String(m(values["usdc"])), "0"],
+                  [String(m(total)), "0"]
+                )
+                .then((res) => {
+                  callback()
+                })
+            })
+        })
+      })
 
       for (let token of Object.keys(values)) {
-        const val = values[token] * Math.pow(10, 18)
         console.log("Approving " + val + " " + token + " no " + contracts[token].address)
-        contracts[token].approve(account.address, [String(val), "0"])
       }
     },
   })
+
+  useEffect(() => {
+    console.log(account)
+  }, account)
 
   useEffect(() => {
     const usdcAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"

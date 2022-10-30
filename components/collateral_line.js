@@ -8,7 +8,7 @@ export default function CollateralLine({ values, token }) {
       </label>
       <div>{token}</div>
       <div className="text-2xl right-0 relative text-cyan-300">
-        {values[token].toLocaleString(undefined, { maximumFractionDigits: 2 })}
+        {/* {values[token].toLocaleString(undefined, { maximumFractionDigits: 2 })} */}
       </div>
     </div>
   )
