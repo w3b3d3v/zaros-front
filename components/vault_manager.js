@@ -1,4 +1,4 @@
-import VaultsManagerABI from "../utils/vaultsManager.json"
+import VaultsManagerABI from "../utils/VaultsManager.json"
 import { Contract } from "starknet"
 
 export default function VaultManager({ account }) {
