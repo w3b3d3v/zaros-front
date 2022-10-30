@@ -24,6 +24,8 @@ export default function MintForm({ account, callback }) {
     usdc: new Contract(erc20abi, erc20Addresses.usdc, account),
   }
 
+  const m = (v) => v * Math.pow(10, 18)
+
   const formik = useFormik({
     initialValues: {
       usdc: 0.0,
@@ -38,8 +40,6 @@ export default function MintForm({ account, callback }) {
         return
       }
 
-      const m = (v) => v * Math.pow(10, 18)
-
       // VaultManager({ account }).createVault(
       //   [String(m(values["eth"])), "0"],
       //   [String(m(values["dai"])), "0"],
@@ -47,24 +47,16 @@ export default function MintForm({ account, callback }) {
       //   [String(m(total)), "0"]
       // )
 
-      contracts["eth"].approve(account.address, [String(m(values["eth"])), "0"]).then((res) => {
-        contracts["dai"].approve(account.address, [String(m(values["dai"])), "0"]).then((res) => {
-          contracts["usdc"]
-            .approve(account.address, [String(m(values["usdc"])), "0"])
-            .then((res) => {
-              VaultManager({ account })
-                .createVault(
-                  [String(m(values["eth"])), "0"],
-                  [String(m(values["dai"])), "0"],
-                  [String(m(values["usdc"])), "0"],
-                  [String(m(total)), "0"]
-                )
-                .then((res) => {
-                  callback()
-                })
-            })
+      VaultManager({ account })
+        .createVault(
+          [String(m(values["eth"])), "0"],
+          [String(m(values["dai"])), "0"],
+          [String(m(values["usdc"])), "0"],
+          [String(m(total)), "0"]
+        )
+        .then((res) => {
+          callback()
         })
-      })
 
       for (let token of Object.keys(values)) {
         console.log("Approving " + val + " " + token + " no " + contracts[token].address)
@@ -72,6 +64,15 @@ export default function MintForm({ account, callback }) {
     },
   })
 
+  const approve = (values) => {
+    contracts["eth"].approve(account.address, [String(m(values["eth"])), "0"]).then((res) => {
+      contracts["dai"].approve(account.address, [String(m(values["dai"])), "0"]).then((res) => {
+        contracts["usdc"].approve(account.address, [String(m(values["usdc"])), "0"]).then((res) => {
+          console.log("Approved")
+        })
+      })
+    })
+  }
   // useEffect(() => {
   //   console.log(account)
   // }, account)
@@ -172,9 +173,19 @@ export default function MintForm({ account, callback }) {
         </div>
       </div>
 
-      <Button pill={true} className="w-1/2 " gradientMonochrome="cyan" type="submit">
-        Mint
-      </Button>
+      <div className="flex flex-row space-x-5 justify-center">
+        <Button pill={true} className="w-1/2 " gradientMonochrome="cyan" type="submit">
+          Mint
+        </Button>
+        <Button
+          pill={true}
+          className="w-1/2 "
+          gradientMonochrome="cyan"
+          onClick={() => approve(formik.values)}
+        >
+          Approve
+        </Button>
+      </div>
     </form>
   )
 }
